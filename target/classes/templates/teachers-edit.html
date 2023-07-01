@@ -1,0 +1,67 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html
+        xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+  <title>Teachers Edit</title>
+</head>
+<body class="d-flex flex-column h-100 bg-light">
+<main class="flex-shrink-0">
+  <!-- Projects Section-->
+  <section layout:fragment="body" class="py-5">
+    <div class="container">
+      <form class="row g-3" role="form" method="post" th:action="@{/teachers/{teacherId}/edit(teacherId=${teacherId})}" th:object="${teacher}">
+        <div class="col-md-6">
+          <label for="fullName" class="form-label">Full Name</label>
+          <input
+                  type="text"
+                  class="form-control"
+                  id="fullName"
+                  name="fullName"
+                  th:field="*{fullName}"
+                  placeholder="Full Name">
+          <p th:if="${#fields.hasErrors('fullName')}" class="text-danger" th:errors="*{fullName}"></p>
+        </div>
+        <div class="col-md-6">
+          <label for="content" class="form-label">Content</label>
+          <input
+                  type="text"
+                  class="form-control"
+                  id="content"
+                  name="content"
+                  th:field="*{content}"
+                  placeholder="Content">
+          <p th:if="${#fields.hasErrors('content')}" class="text-danger" th:errors="*{content}"></p>
+        </div>
+        <div class="col-md-6">
+          <label for="experience" class="form-label">Experience</label>
+          <input
+                  type="text"
+                  class="form-control"
+                  id="experience"
+                  name="experience"
+                  th:field="*{experience}"
+                  placeholder="Experience">
+          <p th:if="${#fields.hasErrors('experience')}" class="text-danger" th:errors="*{experience}"></p>
+        </div>
+        <div class="col-12 mb-3">
+          <label for="photoUrl" class="form-label">Photo Link</label>
+          <input
+                  type="text"
+                  class="form-control"
+                  id="photoUrl"
+                  name="photoUrl"
+                  th:field="*{photoUrl}"
+                  placeholder="Photo Link">
+          <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html
+        xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+    <title>Courses List</title>
+</head>
+    <body class="d-flex flex-column h-100 bg-light">
+    <main class="flex-shrink-0">
+        <!-- Projects Section-->
+        <section layout:fragment="body" class="py-5">
+            <div class="container px-5 mb-5">
+                <div class="text-center mb-5">
+                    <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Courses</span></h1>
+                </div>
+
+                <div class="row gx-5 justify-content-center">
+                    <div>
+                        <form th:action="@{/courses/search}" class="form-inline my-2 my-lg-0 mb-3">
+                            <input name="query" class="form-control mr-sm-2 mb-5" type="search" placeholder="Search courses" aria-label="Search">
+                        </form>
+                    </div>
+                    <div th:each="course :${courses}" class="col-lg-11 col-xl-9 col-xxl-8">
+                        <!-- Project Card 1-->
+                        <div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
+                            <div class="card-body p-0">
+                                <div class="d-flex align-items-center">
+                                    <div class="p-5">
+                                        <div class="d-flex flex-column">
+                                            <h2 th:text="${course.title}" class="fw-bolder"></h2>
+                                            <p th:text="${course.content}"></p>
+                                            <a class="btn btn-primary mb-3" th:href="@{/courses/{courseId}(courseId=${course.id})}">View</a>
+                                            <a th:if="${isAdmin}" class="btn btn-primary" th:href="@{/courses/{courseId}/edit(courseId=${course.id})}">Edit</a>
+                                        </div>
+                                    </div>
+                                    <img class="img-fluid" th:src="${course.photoUrl}" alt="..." />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    </body>
+</html>

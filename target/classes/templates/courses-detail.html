@@ -1,0 +1,91 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html
+        xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+  <title>Courses Details</title>
+</head>
+<body class="d-flex flex-column bg-light">
+  <!-- Projects Section-->
+  <section layout:fragment="body">
+    <!-- Page header with logo and tagline-->
+    <header class="py-5 bg-light border-bottom mb-4">
+      <div class="container">
+        <div class="text-center my-5">
+          <h1 class="fw-bolder" th:text="${course.title}"></h1>
+          <p class="lead mb-0">Check The Information About This Course</p>
+        </div>
+      </div>
+    </header>
+    <!-- Page content-->
+    <div class="container">
+      <div class="row">
+        <!-- Blog entries-->
+        <div class="col-lg-8">
+          <!-- Featured blog post-->
+          <div class="card mb-4">
+            <a href="#!"><img class="card-img-top" th:src="${course.photoUrl}" alt="..." /></a>
+            <div class="card-body">
+              <div class="small text-muted" th:text="${course.createdOn}"></div>
+              <h2 class="card-title">About the course</h2>
+              <p class="card-text" th:text="${course.content}"></p>
+              <a th:if="${isAdmin}" class="btn btn-primary" th:href="@{/courses/{courseId}/delete(courseId=${course.id})}">Delete</a>
+              <a th:if="${isAdmin}" class="btn btn-primary" th:href="@{/teachers/{courseId}/new(courseId=${course.id})}">Add Teacher</a>
+            </div>
+          </div>
+          <!-- Nested row for non-featured blog posts-->
+          <p class="h3">Teachers of this course:</p>
+          <div class="row">
+            <div th:each="teacher :${course.teachers}" class="col-lg-6">
+              <!-- Blog post-->
+              <div class="card mb-4">
+                <a href="#!"><img class="card-img-top" th:src="${teacher.photoUrl}" alt="..." /></a>
+                <div class="card-body">
+                  <h2 th:text="${teacher.fullName}" class="card-title h3"></h2>
+                  <p class="card-text h5">About me: </p>
+                  <p th:text="${teacher.content}" class="card-text"></p>
+                  <p class="card-text h5">Experience: </p>
+                  <p th:text="${teacher.experience}" class="card-text"></p>
+                  <a th:if="${isAdmin}" th:href="@{/teachers/{teacherId}/edit(teacherId=${teacher.id})}" class="btn btn-primary">Edit</a>
+                  <a th:if="${isAdmin}" th:href="@{/teachers/{teacherId}/delete(teacherId=${teacher.id})}" class="btn btn-primary">Delete</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Side widgets-->
+        <div class="col-lg-4">
+          <!-- Categories widget-->
+          <div class="card mb-4">
+            <div class="card-header">Categories</div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-6">
+                  <ul class="list-unstyled mb-0">
+                    <li><a href="#!">English</a></li>
+                    <li><a href="#!">German</a></li>
+                    <li><a href="#!">French</a></li>
+                  </ul>
+                </div>
+                <div class="col-sm-6">
+                  <ul class="list-unstyled mb-0">
+                    <li><a href="#!">Spanish</a></li>
+                    <li><a href="#!">Chinese</a></li>
+                    <li><a href="#!">Korean</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Side widget-->
+          <div class="card mb-4">
+            <div class="card-header">Side Widget</div>
+            <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
